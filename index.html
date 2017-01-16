@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+      <meta charset="utf-8">
+      <title>Angular JS</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+   </head>
+   <body ng-app="myapp">
+      <div id="content" class="container-fluid" ng-controller="DemoCtrl as ctrl">
+         <form>
+            <div class="form-group">
+               <input class="form-control" type="text" ng-model="request.params.q" placeholder="Enter City Name Here.." />
+            </div>
+         </form>
+         <p ng-show="request.params.q">
+            Searching the forecasts for: {{request.params.q}}
+         </p>
+         <h1>
+            Forecast For {{ ctrl.data.city.name}}, {{ctrl.data.city.country}}
+         </h1>
+         <div class="row panel panel-primary" ng-repeat="opt in ctrl.data.list">
+            <div class="col-sm-12 panel-heading">
+               <div class="col-sm-3">
+                  <mydate>{{opt.dt * 1000 | date:'dd MMM yyyy HH:mm:ss Z'}}</mydate>
+                  <h3>{{opt.weather[0].main}}</h3>
+                  <h4>
+                     <img class="img-thumbnail forecast-img" ng-src="http://openweathermap.org/img/w/{{ opt.weather[0].icon }}.png" />
+                  </h4>
+                  <h5>{{opt.weather[0].description}}</h5>
+               </div>
+               <div class="col-sm-3">
+                  <h4>Temperature</h4>
+                  <ul>
+                     <li>Morning: {{ opt.temp.morn }}°C</li>
+                     <li>Day: {{ opt.temp.day }}°C</li>
+                     <li>Evening: {{ opt.temp.eve }}°C</li>
+                     <li>Night: {{ opt.temp.night }}°C</li>
+                  </ul>
+               </div>
+               <div class="col-sm-6">
+                  <h4>Min: {{opt.temp.min}}°C</h4>
+                  <h4>Max: {{opt.temp.max}}°C</h4>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src = "weatherapi.js"></script>
+   </body>
+</html>
