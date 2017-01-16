@@ -1,7 +1,7 @@
 var app = angular.module('myapp', []);
 app.controller('DemoCtrl', function($http,$scope) {
     var ctrl = this;
-    var URL = 'https://api.openweathermap.org/data/2.5/forecast/daily';
+    var URL = 'http://api.openweathermap.org/data/2.5/forecast/daily';
     //var cityName = document.getElementById("search_box").value;
     $scope.request = {
         method: 'GET',
