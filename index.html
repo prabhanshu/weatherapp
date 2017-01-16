@@ -22,14 +22,14 @@
          <div class="row panel panel-primary" ng-repeat="opt in ctrl.data.list">
             <div class="col-sm-12 panel-heading">
                <div class="col-sm-3">
-                  <mydate>{{opt.dt * 1000 | date:'dd MMM yyyy HH:mm:ss Z'}}</mydate>
+                  <mydate>{{opt.dt * 1000 | date:'dd MMM yyyy'}}</mydate>
                   <h3>{{opt.weather[0].main}}</h3>
                   <h4>
                      <img class="img-thumbnail forecast-img" ng-src="http://openweathermap.org/img/w/{{ opt.weather[0].icon }}.png" />
                   </h4>
                   <h5>{{opt.weather[0].description}}</h5>
                </div>
-               <div class="col-sm-3">
+               <div class="col-sm-2">
                   <h4>Temperature</h4>
                   <ul>
                      <li>Morning: {{ opt.temp.morn }}°C</li>
@@ -38,9 +38,15 @@
                      <li>Night: {{ opt.temp.night }}°C</li>
                   </ul>
                </div>
-               <div class="col-sm-6">
-                  <h4>Min: {{opt.temp.min}}°C</h4>
-                  <h4>Max: {{opt.temp.max}}°C</h4>
+               <div class="col-sm-7">
+                  <h4>Min: {{opt.temp.min}}°C | Max: {{opt.temp.max}}°C</h4>
+                  
+                  <div ng-repeat="(key, value) in opt.temp" ng-if="value == opt.temp.min && key != 'min'">
+                    <h5>Lowest temp of {{value}}°C during {{key}}</h5>
+                  </div>
+                  <div ng-repeat="(key, value) in opt.temp" ng-if="value == opt.temp.max && key != 'max'">
+                    <h5>Highest temp of {{value}}°C during {{key}}</h5>
+                  </div>
                </div>
             </div>
          </div>
